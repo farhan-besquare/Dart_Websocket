@@ -15,8 +15,8 @@ import 'package:web_socket_channel/status.dart' as status;
 //         DateTime.fromMillisecondsSinceEpoch(serverTimeAsEpoch * 1000);
 //     print(serverTime);
 //     channel.sink.close();
-//   });
-// }
+// //   });
+// // }
 
 //   channel.sink.add('{"time":1}');
 // }
@@ -28,9 +28,10 @@ import 'package:web_socket_channel/status.dart' as status;
 //   channel.stream.listen((message) {
 //     final decodedMessage = jsonDecode(message);
 //     final activeSymbol = decodedMessage['active_symbols'];
-//     print(activeSymbol);
+//     print(activeSymbol[0]["symbols"]);
 //     channel.sink.close();
 //   });
+// }
 
 //   channel.sink.add('{"active_symbols": "brief", "product_type": "basic"}');
 // }
@@ -49,5 +50,5 @@ void main(List<String> arguments) {
     print('Name: $name' + ' ' + 'Price: $price' + ' ' + 'Date: $serverTime');
   });
 
-  channel.sink.add('{"ticks": "frxAUDCAD"}');
+  channel.sink.add('{"ticks": "frxAUDCAD", "subscribe": 1}');
 }
