@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:web_socket_channel/io.dart';
 
@@ -36,7 +37,7 @@ import 'package:web_socket_channel/status.dart' as status;
 //   channel.sink.add('{"active_symbols": "brief", "product_type": "basic"}');
 // }
 
-void main(List<String> arguments) {
+void getTick(symbol) {
   final channel = IOWebSocketChannel.connect(
       'wss://ws.binaryws.com/websockets/v3?app_id=1089');
 
@@ -50,5 +51,13 @@ void main(List<String> arguments) {
     print('Name: $name' + ' ' + 'Price: $price' + ' ' + 'Date: $serverTime');
   });
 
-  channel.sink.add('{"ticks": "frxAUDCAD", "subscribe": 1}');
+  channel.sink.add('{"ticks": "$symbol", "subscribe": 1}');
+}
+
+void main(List<String> arguments) {
+  print("Enter symbol:");
+  // Reading name of the Geek
+  String? symbol = stdin.readLineSync();
+
+  getTick(symbol);
 }
